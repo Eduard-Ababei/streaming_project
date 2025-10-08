@@ -48,27 +48,51 @@ docs: visión, KPIs y arquitectura inicial
 
 ```
 
-## Día 2 – Creación y sincronización del repositorio GitHub
+# Día 2 – Creación y sincronización del repositorio GitHub
 
-**Objetivo:** conectar el proyecto local con GitHub para control de versiones y visibilidad pública.
+## Objetivo
+Conectar el entorno local de desarrollo con GitHub para garantizar control de versiones, visibilidad del código y trazabilidad de avances durante la FCT.
 
-### Pasos realizados
-1. Creé el repositorio remoto **`streaming_project`** en GitHub.  
-2. Cloné el repositorio mediante **GitHub Desktop**.  
-3. Moví la estructura local dentro del repositorio clonado.  
-4. Realicé el primer *commit* y subí los cambios.  
-5. Verifiqué la sincronización local ↔ remoto.
+---
 
-### Evidencias
-- Captura del repositorio online  
-- Captura del primer commit en GitHub Desktop  
-- Carpeta `data/hello.txt` subida correctamente
+## Tareas realizadas
+1. Crear el repositorio remoto `streaming_project` en GitHub.  
+2. Clonar el repositorio mediante **GitHub Desktop** o `git clone`.  
+3. Mover la estructura local dentro del repositorio clonado.  
+4. Realizar el primer *commit* (`init: estructura base`) y subir los cambios.  
+5. Verificar la sincronización local ↔ remoto.  
 
-### Commit sugerido
+---
+
+## Comandos utilizados
+
 ```bash
+git init
+git remote add origin https://github.com/<usuario>/streaming_project.git
 git add .
-git commit -m "docs: sincronización GitHub completada"
+git commit -m "init: estructura base del proyecto"
+git push -u origin main
+
+
+
+---
+
+## 📄 Contenido de `docs/day2/fuentes_datos.md`
+
+```markdown
+# Fuentes de datos potenciales (avance Día 3)
+
+## Datasets candidatos
+- **TMDB API:** películas, ratings, popularidad.  
+- **IMDb (BigQuery):** dataset público con metadatos y ratings.  
+- **Netflix Kaggle Dataset:** CSV con catálogo y duración.  
+
+## Notas
+- Verificar licencias y términos de uso.  
+- Documentar rutas de acceso y claves API en `.env.example`.  
+- Guardar ejemplos de respuestas (TMDB API) en `/data/raw/`.
+
+
+git add docs\day2 data\hello.txt
+git commit -m "docs(day2): sincronización GitHub completada y evidencias añadidas"
 git push
-
-```
-
