@@ -96,3 +96,58 @@ git push -u origin main
 git add docs\day2 data\hello.txt
 git commit -m "docs(day2): sincronización GitHub completada y evidencias añadidas"
 git push
+
+
+## 🗓️ Día 3 – Instalación y configuración del entorno (Python + Neon)
+
+🎯 **Objetivo:** dejar operativo el entorno local y la base de datos en la nube (Neon PostgreSQL) con conexión directa y segura.
+
+### ⚙️ Configuración del entorno
+
+1. Activé el entorno virtual `.venv` desde PowerShell:
+   ```bash
+   .\.venv\Scripts\Activate.ps1
+
+2 Instalé las librerías necesarias desde requirements.txt:
+   pip install -r requirements.txt
+
+3 Verifiqué las versiones y dependencias principales:
+  python -m pip list
+
+4 Configuré el archivo .env con la conexión directa SSL a Neon:
+  DATABASE_URL=postgresql+psycopg2://neondb_owner:******@ep-old-lake-ab7aayzq.eu-west-2.aws.neon.tech/neondb?sslmode=require
+
+### 🧠 Configuración de Neon (PostgreSQL Cloud)
+1 Creé el proyecto streaming_project en Neon.tech
+
+Región: AWS Europe West 2 (Londres)
+
+PostgreSQL v17
+
+Usuario: neondb_owner
+
+Base de datos: neondb
+
+2 Probé la conexión directa con el script:
+  python etl\check_connection_direct.py
+
+### 🧱 Creación del esquema SQL
+1 Ejecuté el script etl\apply_schema_direct.py para crear las tablas base: 
+  python etl\apply_schema_direct.py
+ Tablas creadas:
+
+movies
+
+genres
+
+movie_genre
+
+platforms
+
+movie_platform
+
+ratings
+
+Verificación final:
+
+  python etl\check_tables_direct.py

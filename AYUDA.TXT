@@ -1,0 +1,24 @@
+Necesistamos git hub
+VSC
+PowerShell
+
+C:\Users\casco\Desktop\streaming
+--------------------
+SOLO UNA VEZ
+py -3.12 -m venv .venv
+& "C:\Users\casco\Desktop\streaming\.venv\Scripts\Activate.ps1"
+pip install -r requirements.txt
+
+-----------------------
+1 Cada vez que encienda PowerShell:
+
+ cd "C:\Users\casco\Desktop\streaming"
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+& "C:\Users\casco\Desktop\streaming\.venv\Scripts\Activate.ps1"
+
+------------------------
+2 Probar conexion BBDD
+
+python etl\test_connection.py
+
+------------------
