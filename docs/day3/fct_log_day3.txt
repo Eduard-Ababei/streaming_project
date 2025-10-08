@@ -1,0 +1,11 @@
+﻿Proyecto: streaming_project
+Día 3 – Configuración del entorno de desarrollo y base de datos
+
+Actividades:
+- Instalación y validación del entorno Python.
+- Creación de entorno virtual .venv.
+- Conexión verificada con Neon PostgreSQL.
+- Creación de tablas base.
+- Configuración inicial de Git y .gitignore.
+
+Resultado: entorno preparado y base de datos en línea lista para ingesta de datos.
