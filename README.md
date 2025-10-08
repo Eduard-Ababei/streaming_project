@@ -77,25 +77,7 @@ git push -u origin main
 
 ---
 
-## 📄 Contenido de `docs/day2/fuentes_datos.md`
-
-```markdown
-# Fuentes de datos potenciales (avance Día 3)
-
-## Datasets candidatos
-- **TMDB API:** películas, ratings, popularidad.  
-- **IMDb (BigQuery):** dataset público con metadatos y ratings.  
-- **Netflix Kaggle Dataset:** CSV con catálogo y duración.  
-
-## Notas
-- Verificar licencias y términos de uso.  
-- Documentar rutas de acceso y claves API en `.env.example`.  
-- Guardar ejemplos de respuestas (TMDB API) en `/data/raw/`.
-
-
-git add docs\day2 data\hello.txt
-git commit -m "docs(day2): sincronización GitHub completada y evidencias añadidas"
-git push
+```
 
 
 ## 🗓️ Día 3 – Instalación y configuración del entorno (Python + Neon)
