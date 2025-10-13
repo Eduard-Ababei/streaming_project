@@ -1,135 +1,111 @@
-# streaming_project
+# Streaming – ETL y Análisis de Datos en la Nube
 
-Analítica de streaming (películas, ratings, plataformas) con pipeline ETL → PostgreSQL (Neon) → BI (Tableau/Power BI) y CI/CD (Jenkins/Docker).
-
-## Día 1 – Presentación y alcance
-
-**Objetivo:** dejar preparado el entorno de trabajo para iniciar el proyecto de datos.
-
-### Alcance
-- **Problema:** integrar y analizar datos de películas (TMDB/IMDb/Netflix) para calcular KPIs y hacer predicción ligera.  
-- **Arquitectura:** ETL (Python/SQLAlchemy) → Neon (PostgreSQL) → Vistas SQL para BI → Dashboards (Tableau/Power BI).  
-- **CI/CD:** Jenkins + Docker.  
-
-### KPIs iniciales
-1. Rating medio por género  
-2. Top N películas por plataforma  
-3. % de estrenos por año  
-4. Distribución de títulos por década  
-5. Crecimiento del catálogo por plataforma  
-
-**Evidencias:**  
-`docs/day1/architecture.png`, `docs/day1/kpis.md`, `docs/day1/scope.md`
+**Streaming** es un proyecto profesional de análisis de datos enfocado en la industria audiovisual. Su objetivo es construir un **pipeline completo de datos** para extraer, transformar y cargar información sobre películas y plataformas de streaming (Netflix, TMDB, IMDb) en una base de datos en la nube, habilitando análisis en herramientas de **Business Intelligence** y preparando el terreno para futuros modelos de predicción.
 
 ---
 
-## Estructura del proyecto
+## Objetivo del proyecto
 
-### plaintext 
-```
-etl/                    # extract, clean, transform, load
-sql/                    # DDL/queries/vistas
-dashboards/
-  ├─ tableau/
-  └─ powerbi/
-infra/                  # Dockerfile, Jenkinsfile, Ansible
-data/
-  ├─ raw/
-  ├─ clean/
-  └─ processed/
-docs/
+El proyecto desarrolla un flujo **ETL (Extract – Transform – Load)** moderno y reproducible que permite:
 
+- Integrar datos de distintas fuentes públicas relacionadas con películas y plataformas.
+- Limpiar, transformar y almacenar la información en una base de datos SQL en la nube.
+- Exponer vistas optimizadas para análisis y dashboards en herramientas BI.
+- Preparar la arquitectura para procesos de machine learning y despliegue automatizado.
+
+---
+
+## Tecnologías utilizadas
+
+| Capa | Tecnologías principales |
+|------|---------------------------|
+| Extracción y transformación | Python, Pandas, SQLAlchemy |
+| Almacenamiento | PostgreSQL (Neon Cloud) |
+| Infraestructura y despliegue | GitHub, Docker, Jenkins |
+| Business Intelligence | Tableau, Power BI |
+| Cloud & Big Data | Google BigQuery, GCS |
+
+---
+
+## ⚙️ Arquitectura del proyecto
+
+streaming/
+├─ etl/ # Scripts de extracción, limpieza y carga (clean_csv, reset_schema, apply_schema, etc.)
+├─ sql/ # Definición de esquemas, consultas y vistas
+├─ data/ # Datos brutos, limpios y procesados
+│ ├─ raw/
+│ ├─ clean/
+│ └─ processed/
+├─ dashboards/ # Dashboards de Tableau y Power BI
+├─ infra/ # CI/CD, Dockerfile, Jenkinsfile, Ansible
+└─ docs/ # Documentación técnica, diagramas, evidencias
+
+
+---
+
+## Pipeline ETL
+
+1. **Extract:** descarga de datasets (Netflix, TMDB, IMDb) y carga en formato CSV o JSON.  
+2. **Transform:** limpieza, normalización, creación de columnas derivadas y validación de datos.  
+3. **Load:** almacenamiento en PostgreSQL (Neon) mediante scripts Python (`apply_schema.py`, `reset_schema.py`, etc.).  
+4. **Query:** creación de vistas y consultas SQL optimizadas para análisis.  
+5. **Visualize:** conexión de Power BI y Tableau a las vistas para generar dashboards dinámicos.
+
+---
+
+## Estructura de carpetas
+
+| Carpeta | Contenido principal |
+|--------|-----------------------|
+| `etl/` | Scripts Python para extracción, limpieza, transformación y carga |
+| `sql/` | Archivos `.sql` con el esquema y las consultas |
+| `data/` | Archivos CSV/JSON en diferentes etapas del pipeline |
+| `dashboards/` | Dashboards desarrollados en Tableau y Power BI |
+| `infra/` | Configuración de CI/CD, Dockerfile, Jenkinsfile |
+| `docs/` | Diagramas, capturas y documentación de cada fase |
+
+---
+
+## Cómo ejecutar el proyecto
+
+1. Clonar el repositorio:
+git clone https://github.com/tuusuario/streaming.git
+cd streaming
+
+2. Crear entorno virtual e instalar dependencias:
 python -m venv .venv
-source .venv/bin/activate   # (Windows: .venv\Scripts\activate)
+.venv\Scripts\activate   # (Windows)
 pip install -r requirements.txt
-cp .env.example .env        # Rellena DATABASE_URL con tu cadena de Neon
 
-docs: visión, KPIs y arquitectura inicial
+3. Configurar variables de entorno:
+cp .env.example .env
+Editar DATABASE_URL con la cadena de conexión de Neon
 
-```
+4. Ejecutar el pipeline:
+python etl/clean_csv.py
+python etl/apply_schema.py
+python etl/reset_schema.py
 
-# Día 2 – Creación y sincronización del repositorio GitHub
 
-## Objetivo
-Conectar el entorno local de desarrollo con GitHub para garantizar control de versiones, visibilidad del código y trazabilidad de avances durante la FCT.
+Resultados esperados
 
----
+Base de datos limpia y normalizada con información de películas, géneros, plataformas y ratings.
 
-## Tareas realizadas
-1. Crear el repositorio remoto `streaming_project` en GitHub.  
-2. Clonar el repositorio mediante **GitHub Desktop** o `git clone`.  
-3. Mover la estructura local dentro del repositorio clonado.  
-4. Realizar el primer *commit* (`init: estructura base`) y subir los cambios.  
-5. Verificar la sincronización local ↔ remoto.  
+Vistas SQL listas para análisis exploratorio.
 
----
-
-## Comandos utilizados
-
-```bash
-git init
-git remote add origin https://github.com/<usuario>/streaming_project.git
-git add .
-git commit -m "init: estructura base del proyecto"
-git push -u origin main
+Dashboards con KPIs como rating medio, estrenos por año, crecimiento del catálogo o top películas por plataforma.
 
 
 
----
-
-```
 
 
-## 🗓️ Día 3 – Instalación y configuración del entorno (Python + Neon)
 
-🎯 **Objetivo:** dejar operativo el entorno local y la base de datos en la nube (Neon PostgreSQL) con conexión directa y segura.
 
-### ⚙️ Configuración del entorno
 
-1. Activé el entorno virtual `.venv` desde PowerShell:
-   ```bash
-   .\.venv\Scripts\Activate.ps1
 
-2 Instalé las librerías necesarias desde requirements.txt:
-   pip install -r requirements.txt
 
-3 Verifiqué las versiones y dependencias principales:
-  python -m pip list
 
-4 Configuré el archivo .env con la conexión directa SSL a Neon:
-  DATABASE_URL=postgresql+psycopg2://neondb_owner:******@ep-old-lake-ab7aayzq.eu-west-2.aws.neon.tech/neondb?sslmode=require
 
-### 🧠 Configuración de Neon (PostgreSQL Cloud)
-1 Creé el proyecto streaming_project en Neon.tech
 
-Región: AWS Europe West 2 (Londres)
 
-PostgreSQL v17
 
-Usuario: neondb_owner
-
-Base de datos: neondb
-
-2 Probé la conexión directa con el script:
-  python etl\check_connection_direct.py
-
-### 🧱 Creación del esquema SQL
-1 Ejecuté el script etl\apply_schema_direct.py para crear las tablas base: 
-  python etl\apply_schema_direct.py
- Tablas creadas:
-
-movies
-
-genres
-
-movie_genre
-
-platforms
-
-movie_platform
-
-ratings
-
-Verificación final:
-
-  python etl\check_tables_direct.py
