@@ -1,29 +1,14 @@
-import psycopg2, ssl
+import psycopg2
+import os
+from dotenv import load_dotenv
 
 print("🔍 Intentando conexión directa a Neon (sin DNS)...")
 
-# Datos reales de tu conexión
-user = "neondb_owner"
-password = "npg_lIsAn4uah9MT"
-dbname = "neondb"
-host = "ep-old-lake-ab7aayzq-pooler.eu-west-2.aws.neon.tech"
-port = 5432
-
-# Configuración SSL (segura)
-ssl_context = ssl.create_default_context()
-ssl_context.check_hostname = False
-ssl_context.verify_mode = ssl.CERT_NONE
+load_dotenv()
+DATABASE_URL = os.getenv("DATABASE_URL").replace("postgresql+psycopg2://", "postgresql://")
 
 try:
-    conn = psycopg2.connect(
-        user=user,
-        password=password,
-        host=host,
-        port=port,
-        dbname=dbname,
-        sslmode="require",
-        target_session_attrs="read-write"
-    )
+    conn = psycopg2.connect(DATABASE_URL)
     cur = conn.cursor()
     cur.execute("SELECT version();")
     version = cur.fetchone()

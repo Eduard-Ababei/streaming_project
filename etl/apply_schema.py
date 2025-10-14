@@ -1,26 +1,32 @@
-﻿from sqlalchemy import create_engine, text
+import os
+from sqlalchemy import create_engine, text
 from dotenv import load_dotenv
-import os, pathlib
+import pathlib
 
+print("🛠️ Creando tablas en Neon...")
+
+# 1. Cargar credenciales desde .env
 load_dotenv()
-db_url = os.getenv("DATABASE_URL")
-if not db_url:
-    raise RuntimeError("❌ No se encontró DATABASE_URL en .env")
+DATABASE_URL = os.getenv("DATABASE_URL")
+if not DATABASE_URL:
+    raise ValueError("❌ No se encontró DATABASE_URL en el archivo .env")
 
-engine = create_engine(db_url)
+# 2. Crear conexión con SQLAlchemy
+engine = create_engine(DATABASE_URL)
 
-# Leer el archivo SQL
-ddl_path = pathlib.Path("sql/000_schema.sql")
+# 3. Leer archivo DDL (definición del esquema)
+ddl_path = pathlib.Path("C:/Users/casco/Desktop/streaming/000_schema.sql")
 if not ddl_path.exists():
-    raise FileNotFoundError("No se encontró sql/000_schema.sql")
+    raise FileNotFoundError("❌ No se encontró sql/000_schema.sql")
 
-ddl = ddl_path.read_text(encoding="utf-8")
+ddl_content = ddl_path.read_text(encoding="utf-8")
 
-# Separar statements por ';' y ejecutarlos
-stmts = [s.strip() for s in ddl.split(";") if s.strip()]
+# 4. Ejecutar cada sentencia SQL por separado
+statements = [stmt.strip() for stmt in ddl_content.split(";") if stmt.strip()]
 
 with engine.begin() as conn:
-    for s in stmts:
-        conn.execute(text(s))
+    for stmt in statements:
+        conn.execute(text(stmt))
+        print("✅ Sentencia ejecutada correctamente.")
 
-print("✅ Esquema SQL creado correctamente en Neon.")
+print("🎉 Esquema creado con éxito en la base de datos.")

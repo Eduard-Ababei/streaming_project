@@ -1,23 +1,18 @@
-﻿from sqlalchemy import create_engine, text
+import pandas as pd
+from sqlalchemy import create_engine
 from dotenv import load_dotenv
 import os
 
 load_dotenv()
 engine = create_engine(os.getenv("DATABASE_URL"))
 
-print("🔍 Comprobando tablas en la base de datos...\n")
+print("✅ Conectado a Neon")
 
-with engine.connect() as conn:
-    rows = conn.execute(text("""
-        SELECT table_name
-        FROM information_schema.tables
-        WHERE table_schema='public'
-        ORDER BY table_name;
-    """)).fetchall()
+tables = pd.read_sql("SELECT table_name FROM information_schema.tables WHERE table_schema='public';", engine)
+print("📋 Tablas disponibles:")
+print(tables)
 
-    if not rows:
-        print("⚠️ No hay tablas en la base de datos.")
-    else:
-        print("✅ Tablas encontradas:")
-        for r in rows:
-            print("-", r[0])
+if "movies" in tables.values:
+    df = pd.read_sql("SELECT * FROM movies LIMIT 10;", engine)
+    print("\n🎬 Ejemplo de datos en 'movies':")
+    print(df)
