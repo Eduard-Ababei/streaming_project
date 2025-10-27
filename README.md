@@ -82,9 +82,29 @@ cp .env.example .env
 Editar DATABASE_URL con la cadena de conexión de Neon
 
 4. Ejecutar el pipeline:
-python etl/clean_csv.py
-python etl/apply_schema.py
-python etl/reset_schema.py
+Primera ejecución del proyecto (desde cero)
+
+Si nunca has corrido el proyecto o acabas de crear una base de datos vacía en Neon, este es el orden:
+
+check_connection_direct.py
+→ Verifica que Python se conecta correctamente a Neon.
+(Comprobación previa obligatoria)
+
+clean_csv.py
+→ Limpia el dataset crudo (CSV) y genera uno limpio (movies_clean.csv).
+(Necesario antes de cargar datos)
+
+apply_schema.py
+→ Crea las tablas base en la base de datos (movies, genres, ratings, etc.).
+(Primero se crean las tablas vacías)
+
+etl_load_movies.py
+→ Carga los datos limpios desde el CSV en la tabla movies.
+(Aquí es cuando realmente se insertan datos)
+
+check_tables.py
+→ Muestra las tablas y un preview de los datos para confirmar que todo salió bien.
+
 
 
 Resultados esperados
