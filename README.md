@@ -102,6 +102,12 @@ streaming/
 ## 7. Ejecución del proyecto
 
 1. **Clonar el repositorio**
+
+
+
+## 7. Ejecución del proyecto
+
+1. **Clonar el repositorio**
    
 git clone https://github.com/tuusuario/streaming.git
 cd streaming
@@ -109,58 +115,64 @@ cd streaming
 2. **Configurar entorno virtual e instalar dependencias**
 
 python -m venv .venv
+.venv\Scripts\activate   # (Windows)
 .venv\Scripts\activate
 pip install -r requirements.txt
 
-3. Configurar variables de entorno:
-cp .env.example .env
-Editar DATABASE_URL con la cadena de conexión de Neon
 
-4. Ejecutar el pipeline:
-Primera ejecución del proyecto (desde cero)
+3. **Configurar variables de entorno**
 
-Si nunca has corrido el proyecto o acabas de crear una base de datos vacía en Neon, este es el orden:
+DATABASE_URL=postgresql+psycopg2://user:password@host/dbname?sslmode=require
+TMDB_API_KEY=tu_api_key_aqui
 
-check_connection_direct.py
-→ Verifica que Python se conecta correctamente a Neon.
-(Comprobación previa obligatoria)
+4. **Verificar conexión a Neon**
 
-clean_csv.py
-→ Limpia el dataset crudo (CSV) y genera uno limpio (movies_clean.csv).
-(Necesario antes de cargar datos)
+python etl\check_connection_direct.py
 
-apply_schema.py
-→ Crea las tablas base en la base de datos (movies, genres, ratings, etc.).
-(Primero se crean las tablas vacías)
+5. **Extraer datos desde TMDB**
 
-etl_load_movies.py
-→ Carga los datos limpios desde el CSV en la tabla movies.
-(Aquí es cuando realmente se insertan datos)
+python etl\extract_tmdb.py
 
-check_tables.py
-→ Muestra las tablas y un preview de los datos para confirmar que todo salió bien.
+5.5 **(Si no tienes API key activa, usa la demo)**
+
+python etl\extract_tmdb_demo.py
 
 
-
-Resultados esperados
-
-Base de datos limpia y normalizada con información de películas, géneros, plataformas y ratings.
-
-Vistas SQL listas para análisis exploratorio.
-
-Dashboards con KPIs como rating medio, estrenos por año, crecimiento del catálogo o top películas por plataforma.
+6. **Limpiar datos extraídos**
+   
+python etl\clean_tmdb.py
 
 
+7. **(Opcional) Limpieza del dataset demo**
+   
+python etl\clean_local_netflix_csv.py
 
 
+---
 
+## 8. Resultados actuales
 
+- Dataset limpio y normalizado (`data/clean/movies_clean.csv`).  
+- Conexión establecida entre Python y Neon PostgreSQL.  
+- Pipeline funcional de extracción y limpieza totalmente reproducible.  
+- Preparación finalizada para iniciar la transformación y carga en base de datos.
 
+---
 
+## 9. Próximos pasos
 
+- Fase 3: Transformación de datos y creación de tablas auxiliares.  
+- Fase 4: Dashboards y KPIs en Tableau y Power BI.  
+- Fase 5: Integración Cloud (BigQuery y GCS).  
+- Fase 6: CI/CD con Docker y Jenkins.  
+- Fase 7: Documentación final y entrega.
 
+---
 
+## 10. Autoría
 
+Proyecto en desarrollo como parte del TFG/FCT  
+**Transformación Digital en el Streaming: Big Data e IA en la Industria Audiovisual**  
 
-
-
+Autor: **Stefan Eduard Ababei Jorascu**  
+Repositorio: [GitHub](https://github.com/tuusuario/streaming)
