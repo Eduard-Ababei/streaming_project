@@ -102,12 +102,6 @@ streaming/
 ## 7. Ejecución del proyecto
 
 1. **Clonar el repositorio**
-
-
-
-## 7. Ejecución del proyecto
-
-1. **Clonar el repositorio**
    
 git clone https://github.com/tuusuario/streaming.git
 cd streaming
