@@ -103,7 +103,7 @@ streaming/
 
 1. **Clonar el repositorio**
    
-git clone https://github.com/tuusuario/streaming.git
+git clone https://github.com/Eduard-Ababei/streaming_project
 cd streaming
 
 2. **Configurar entorno virtual e instalar dependencias**
