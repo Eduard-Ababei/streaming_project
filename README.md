@@ -112,62 +112,55 @@ python -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
 
+3. Configurar variables de entorno:
+cp .env.example .env
+Editar DATABASE_URL con la cadena de conexión de Neon
 
-3. **Configurar variables de entorno**
+4. Ejecutar el pipeline:
+Primera ejecución del proyecto (desde cero)
 
-DATABASE_URL=postgresql+psycopg2://user:password@host/dbname?sslmode=require
-TMDB_API_KEY=tu_api_key_aqui
+Si nunca has corrido el proyecto o acabas de crear una base de datos vacía en Neon, este es el orden:
 
+check_connection_direct.py
+→ Verifica que Python se conecta correctamente a Neon.
+(Comprobación previa obligatoria)
 
-4. **Verificar conexión a Neon**
+clean_csv.py
+→ Limpia el dataset crudo (CSV) y genera uno limpio (movies_clean.csv).
+(Necesario antes de cargar datos)
 
-python etl\check_connection_direct.py
+apply_schema.py
+→ Crea las tablas base en la base de datos (movies, genres, ratings, etc.).
+(Primero se crean las tablas vacías)
 
+etl_load_movies.py
+→ Carga los datos limpios desde el CSV en la tabla movies.
+(Aquí es cuando realmente se insertan datos)
 
-5. **Extraer datos desde TMDB**
-
-python etl\extract_tmdb.py
-
-
-(Si no tienes API key activa, usa la demo)
-
-python etl\extract_tmdb_demo.py
-
-
-6. **Limpiar datos extraídos**
-   
-python etl\clean_tmdb.py
-
-
-7. **(Opcional) Limpieza del dataset demo**
-   
-python etl\clean_local_netflix_csv.py
+check_tables.py
+→ Muestra las tablas y un preview de los datos para confirmar que todo salió bien.
 
 
----
 
-## 8. Resultados actuales
+Resultados esperados
 
-- Dataset limpio y normalizado (`data/clean/movies_clean.csv`).  
-- Conexión establecida entre Python y Neon PostgreSQL.  
-- Pipeline funcional de extracción y limpieza totalmente reproducible.  
-- Preparación finalizada para iniciar la transformación y carga en base de datos.
+Base de datos limpia y normalizada con información de películas, géneros, plataformas y ratings.
 
----
+Vistas SQL listas para análisis exploratorio.
 
-## 9. Próximos pasos
+Dashboards con KPIs como rating medio, estrenos por año, crecimiento del catálogo o top películas por plataforma.
 
-- Fase 3: Transformación de datos y creación de tablas auxiliares.  
-- Fase 4: Dashboards y KPIs en Tableau y Power BI.  
-- Fase 5: Integración Cloud (BigQuery y GCS).  
-- Fase 6: CI/CD con Docker y Jenkins.  
-- Fase 7: Documentación final y entrega.
 
----
 
-## 10. Autoría
-Stefan Eduard Ababei Jorascu
-Proyecto en desarrollo como forma de adquirir experiencia para los puestos de trabajo.
 
-Autor: **Stefan Eduard Ababei Jorascu**  
-Repositorio: [GitHub](https://github.com/tuusuario/streaming)
+
+
+
+
+
+
+
+
+
+
+
