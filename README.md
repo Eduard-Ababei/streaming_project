@@ -47,26 +47,27 @@ Todo el proceso es reproducible desde cero.
 ## 4. Arquitectura de carpetas
 
 streaming/
-├─ etl/                      # Scripts ETL
-│  ├─ clean_local_netflix_csv.py
-│  ├─ apply_schema.py
-│  ├─ reset_schema.py
-│  ├─ etl_load_movies.py
-│  └─ check_connection_direct.py
 │
-├─ data/                     # Datasets
-│  ├─ raw/
-│  ├─ clean/
-│  └─ processed/
+├── etl/ # Scripts ETL
+│ ├── clean_local_netflix_csv.py
+│ ├── apply_schema.py
+│ ├── reset_schema.py
+│ ├── etl_load_movies.py
+│ └── check_connection_direct.py
 │
-├─ sql/                      # Esquema SQL
-│  └─ 000_schema.sql
+├── data/ # Datasets
+│ ├── raw/
+│ ├── clean/
+│ └── processed/
 │
-├─ dashboards/               # (Preparado para visualización)
+├── sql/ # Esquema SQL
+│ └── 000_schema.sql
 │
-├─ infra/                    # (Estructura de CI/CD)
+├── dashboards/ # (Preparado para visualización)
 │
-└─ docs/                     # Documentación y diagramas
+├── infra/ # (Estructura de CI/CD)
+│
+└── docs/ # Documentación y diagramas
 
 
 
