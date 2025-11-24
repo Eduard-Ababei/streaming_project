@@ -10,8 +10,6 @@ The ETL process includes:
 - **Load:** ingest data into Neon PostgreSQL  
 - **Validate:** execute SQL queries to confirm correct ingestion  
 
-The project is officially **completed on Day 10**.
-
 ---
 
 ## 1. Overview
