@@ -46,28 +46,38 @@ Todo el proceso es reproducible desde cero.
 
 ## 4. Arquitectura de carpetas
 
-streaming/
-│
-├── etl/ # Scripts ETL
-│ ├── clean_local_netflix_csv.py
-│ ├── apply_schema.py
-│ ├── reset_schema.py
-│ ├── etl_load_movies.py
-│ └── check_connection_direct.py
-│
-├── data/ # Datasets
-│ ├── raw/
-│ ├── clean/
-│ └── processed/
-│
-├── sql/ # Esquema SQL
-│ └── 000_schema.sql
-│
-├── dashboards/ # (Preparado para visualización)
-│
-├── infra/ # (Estructura de CI/CD)
-│
-└── docs/ # Documentación y diagramas
+data/
+    ├── clean/
+        └── movies_clean.csv
+    ├── processed/
+        └── movies_from_tmdb_demo.csv
+    ├── movies_clean.csv
+    └── movies_raw.csv
+docs/
+    ├── kpis.md
+    ├── progreso.md
+    ├── scope.md
+    └── setup.md
+etl/
+    ├── apply_schema.py
+    ├── check_connection_direct.py
+    ├── check_tables.py
+    ├── clean_local_netflix_csv.py
+    ├── clean_tmdb.py
+    ├── etl_load_movies.py
+    ├── extract_tmdb_demo.py
+    ├── extract_tmdb.py
+    ├── reset_schema.py
+    └── test_connection.py
+sql/
+    └── 000_schema.sql
+.env
+.env.example
+AYUDA.TXT
+estructura.txt
+from dotenv import load_dotenv.py
+README.md
+requirements.txt
 
 
 
