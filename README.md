@@ -47,42 +47,43 @@ The entire workflow is reproducible from scratch.
 ## 4. Project Structure
 
 ```
-data/
-    ├── clean/
-        └── movies_clean.csv
-    ├── processed/
-        └── movies_from_tmdb_demo.csv
-    ├── movies_clean.csv
-    └── movies_raw.csv
+streaming_project/
+│
+├── data/
+│   ├── raw/
+│   │   └── movies_raw.csv
+│   ├── clean/
+│   │   └── movies_clean.csv
+│   └── processed/
+│       └── movies_from_tmdb_demo.csv   (si lo quieres quitar, lo quitamos)
+│
+├── dashboards/
+│   └── README.md
+│
+├── docs/
+│   ├── kpis.md
+│   ├── progreso.md
+│   ├── scope.md
+│   └── setup.md
+│
+├── etl/
+│   ├── clean_local_netflix_csv.py
+│   ├── reset_schema.py
+│   ├── apply_schema.py
+│   ├── etl_load_movies.py
+│   ├── test_connection.py
+│   ├── check_tables.py
+│   └── check_connection_direct.py
+│
+├── sql/
+│   └── 000_schema.sql
+│
+├── .env
+├── .env.example
+├── .gitignore
+├── README.md
+└── requirements.txt
 
-docs/
-    ├── kpis.md
-    ├── progreso.md
-    ├── scope.md
-    └── setup.md
-
-etl/
-    ├── apply_schema.py
-    ├── check_connection_direct.py
-    ├── check_tables.py
-    ├── clean_local_netflix_csv.py
-    ├── clean_tmdb.py
-    ├── etl_load_movies.py
-    ├── extract_tmdb_demo.py
-    ├── extract_tmdb.py
-    ├── reset_schema.py
-    └── test_connection.py
-
-sql/
-    └── 000_schema.sql
-
-.env  
-.env.example  
-AYUDA.TXT  
-estructura.txt  
-from dotenv import load_dotenv.py  
-README.md  
-requirements.txt
 ```
 
 ---
