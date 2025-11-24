@@ -4,24 +4,39 @@ from dotenv import load_dotenv
 import os
 from pathlib import Path
 
-print("Conexión establecida con Neon...")
+print("[INFO] Loading cleaned dataset into Neon PostgreSQL...")
 
-# 1. Cargar credenciales
+# ------------------------------------------------------------
+# 1. Load environment variables
+# ------------------------------------------------------------
 load_dotenv()
-engine = create_engine(os.getenv("DATABASE_URL"))
+DATABASE_URL = os.getenv("DATABASE_URL")
 
-# 2. Ruta correcta al CSV limpio
-csv_path = Path(__file__).resolve().parent.parent / "data" / "movies_clean.csv"
+if not DATABASE_URL:
+    raise ValueError("[ERROR] DATABASE_URL not found in .env")
 
-df = pd.read_csv(csv_path)
-print(f"Dataset limpio cargado: {len(df)} filas, {len(df.columns)} columnas")
+engine = create_engine(DATABASE_URL)
 
-# 3. Carga en la base de datos
+# ------------------------------------------------------------
+# 2. Locate cleaned CSV file
+# ------------------------------------------------------------
+BASE_DIR = Path(__file__).resolve().parent.parent
+CSV_PATH = BASE_DIR / "data" / "clean" / "movies_clean.csv"
+
+if not CSV_PATH.exists():
+    raise FileNotFoundError(f"[ERROR] Cleaned dataset not found: {CSV_PATH}")
+
+df = pd.read_csv(CSV_PATH)
+print(f"[INFO] Clean dataset loaded: {df.shape[0]} rows, {df.shape[1]} columns")
+
+# ------------------------------------------------------------
+# 3. Load data into database
+# ------------------------------------------------------------
 with engine.begin() as conn:
-    # Eliminar tabla anterior de forma compatible con SQLAlchemy 2.0
+    # Remove existing table if present
     conn.execute(text("DROP TABLE IF EXISTS movies CASCADE"))
 
-    # Cargar datos (to_sql ya sustituye la tabla)
+    # Load into database
     df.to_sql("movies", con=conn, if_exists="replace", index=False)
 
-print("Tabla 'movies' creada y datos cargados correctamente.")
+print("[OK] Table 'movies' created and data loaded successfully.")

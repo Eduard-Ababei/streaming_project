@@ -1,24 +1,45 @@
+```
+# ===============================
 # Python
+# ===============================
 __pycache__/
 *.py[cod]
 *.pyo
+*.pyd
 
-# Environments
+# Virtual environments
 .venv/
 venv/
 env/
 
-# VSCode
-.vscode/
+# Jupyter
 .ipynb_checkpoints/
 
-# Credentials (VERY IMPORTANT)
+# ===============================
+# Environment variables (NEVER upload secrets)
+# ===============================
+.env
+*.env
+.env.*
+
+# ===============================
+# Credentials (service accounts, API keys, secrets)
+# ===============================
 credentials/
 *.json
+*.key
+*.pem
 
-# Logs
-*.log
+# ===============================
+# VS Code
+# ===============================
+.vscode/
+*.code-workspace
 
-# OS files
-.DS_Store
+# ===============================
+# OS / Editor junk
+# ===============================
 Thumbs.db
+.DS_Store
+*.log
+```

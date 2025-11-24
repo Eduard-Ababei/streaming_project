@@ -3,30 +3,47 @@ from sqlalchemy import create_engine, text
 from dotenv import load_dotenv
 from pathlib import Path
 
-print("🛠️ Creando tablas en Neon...")
+print("[INFO] Applying SQL schema to Neon PostgreSQL...")
 
-# 1. Cargar credenciales desde .env
+# ------------------------------------------------------------
+# 1. Load environment variables
+# ------------------------------------------------------------
 load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
-if not DATABASE_URL:
-    raise ValueError("❌ No se encontró DATABASE_URL en el archivo .env")
 
-# 2. Crear conexión con SQLAlchemy
+if not DATABASE_URL:
+    raise ValueError("[ERROR] DATABASE_URL not found in .env")
+
+# ------------------------------------------------------------
+# 2. Create database engine
+# ------------------------------------------------------------
 engine = create_engine(DATABASE_URL)
 
-# 3. Ruta correcta al archivo DDL
+# ------------------------------------------------------------
+# 3. Locate SQL schema file
+# ------------------------------------------------------------
 ddl_path = Path(__file__).resolve().parent.parent / "sql" / "000_schema.sql"
+
 if not ddl_path.exists():
-    raise FileNotFoundError(f"No se encontró el archivo SQL en: {ddl_path}")
+    raise FileNotFoundError(f"[ERROR] SQL schema file not found: {ddl_path}")
 
 ddl_content = ddl_path.read_text(encoding="utf-8")
 
-# 4. Ejecutar cada sentencia SQL por separado
-statements = [stmt.strip() for stmt in ddl_content.split(";") if stmt.strip()]
+# ------------------------------------------------------------
+# 4. Split SQL script into executable statements
+# ------------------------------------------------------------
+statements = [
+    stmt.strip()
+    for stmt in ddl_content.split(";")
+    if stmt.strip()
+]
 
+# ------------------------------------------------------------
+# 5. Execute schema statements
+# ------------------------------------------------------------
 with engine.begin() as conn:
     for stmt in statements:
         conn.execute(text(stmt))
-        print("✅ Sentencia ejecutada correctamente.")
+        print("[OK] Statement executed.")
 
-print("🎉 Esquema creado con éxito en la base de datos.")
+print("[INFO] Schema applied successfully.")
