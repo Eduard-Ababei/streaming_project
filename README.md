@@ -1,50 +1,50 @@
-# Streaming – ETL y Análisis de Datos en la Nube
+# Streaming – ETL and Cloud Data Analysis (Demo Project)
 
-**Streaming** es un proyecto profesional centrado en la analítica de datos del sector audiovisual.  
-El objetivo de este proyecto es construir un pipeline **ETL completo y funcional** utilizando un **dataset local**, replicando un flujo real de trabajo en ingeniería de datos sin depender de APIs externas.
+**Streaming** is a professional data engineering demo project focused on analytics in the audiovisual sector.  
+The objective is to build a **fully functional ETL pipeline** using a **local dataset**, replicating a realistic data engineering workflow without relying on external APIs.
 
-Este proyecto queda **completamente finalizado en el Día 10**, con un ETL 100% operativo:  
-limpieza del dataset, creación del esquema SQL y carga final en PostgreSQL (Neon).
-
----
-
-## 1. Descripción general
-
-El proyecto implementa un flujo ETL profesional formado por:
-
-- Lectura del dataset original (Netflix demo)  
-- Limpieza y normalización con Pandas  
-- Creación del modelo relacional y el esquema SQL  
-- Carga final en Neon mediante SQLAlchemy  
-- Verificación completa del pipeline
-
-Todo el proceso es reproducible desde cero.
+This project is **officially completed on Day 10**, delivering a 100% operational ETL pipeline:  
+dataset cleaning, SQL schema creation, and final loading into Neon PostgreSQL.
 
 ---
 
-## 2. Objetivos
+## 1. Overview
 
-- Procesar y limpiar un dataset local.  
-- Definir un esquema SQL coherente para la tabla `movies`.  
-- Cargar los datos limpios en Neon PostgreSQL.  
-- Construir un pipeline ETL estructurado y modular.  
-- Documentar la arquitectura y la ejecución del proyecto.
+The project implements a complete ETL workflow consisting of:
 
----
+- Reading the original dataset (Netflix demo).  
+- Cleaning and normalizing data using Pandas.  
+- Designing a relational model and SQL schema.  
+- Loading final data into Neon PostgreSQL using SQLAlchemy.  
+- Full pipeline validation.
 
-## 3. Tecnologías principales
-
-| Etapa | Tecnologías |
-|-------|--------------|
-| Extracción | CSV local |
-| Transformación | Python, Pandas |
-| Carga | SQLAlchemy, PostgreSQL (Neon Cloud) |
-| Validación | SQL, Python |
-| Control de versiones | Git, GitHub |
+The entire workflow is reproducible from scratch.
 
 ---
 
-## 4. Arquitectura de carpetas
+## 2. Objectives
+
+- Process and clean a local dataset.  
+- Define a structured SQL schema for the `movies` table.  
+- Load the cleaned dataset into Neon PostgreSQL.  
+- Build a modular and maintainable ETL pipeline.  
+- Document the project architecture and execution.
+
+---
+
+## 3. Technologies Used
+
+| Stage | Tools / Technologies |
+|--------|-----------------------|
+| Extraction | Local CSV |
+| Transformation | Python, Pandas |
+| Load | SQLAlchemy, PostgreSQL (Neon Cloud) |
+| Validation | SQL, Python |
+| Version Control | Git, GitHub |
+
+---
+
+## 4. Project Structure
 
 ```
 data/
@@ -54,11 +54,13 @@ data/
         └── movies_from_tmdb_demo.csv
     ├── movies_clean.csv
     └── movies_raw.csv
+
 docs/
     ├── kpis.md
     ├── progreso.md
     ├── scope.md
     └── setup.md
+
 etl/
     ├── apply_schema.py
     ├── check_connection_direct.py
@@ -70,94 +72,99 @@ etl/
     ├── extract_tmdb.py
     ├── reset_schema.py
     └── test_connection.py
+
 sql/
     └── 000_schema.sql
-.env
-.env.example
-AYUDA.TXT
-estructura.txt
-from dotenv import load_dotenv.py
-README.md
-requirements.txt
 
+.env  
+.env.example  
+AYUDA.TXT  
+estructura.txt  
+from dotenv import load_dotenv.py  
+README.md  
+requirements.txt
 ```
 
+---
+
+## 5. Development Status (Project Closed on Day 10)
+
+| Day | Phase | Status | Description |
+|-----|--------|---------|-------------|
+| 1 | Planning | Completed | Scope definition and system architecture. |
+| 2 | Dataset | Completed | Import and initial organization of the local dataset. |
+| 3 | Environment | Completed | Virtual environment setup and Neon connection. |
+| 4 | Repository | Completed | Initial folder structure and version control. |
+| 5 | Exploration | Completed | Preliminary dataset exploration. |
+| 6 | Data Model | Completed | MER design and `movies` table structure. |
+| 7 | SQL Schema | Completed | DDL implementation in Neon PostgreSQL. |
+| 8 | Cleaning | Completed | Dataset cleaning and normalization (`movies_clean.csv`). |
+| 9 | Load | Completed | Final load into Neon using SQLAlchemy. |
+| 10 | ETL Pipeline | Completed | Fully validated end-to-end ETL. |
+
+This project is officially closed on **Day 10**.
 
 ---
 
-## 5. Estado del desarrollo (Proyecto cerrado en Día 10)
+## 6. ETL Pipeline
 
-| Día | Fase | Estado | Descripción |
-|-----|------|---------|-------------|
-| 1 | Presentación | Completado | Definición del alcance y arquitectura general. |
-| 2 | Dataset | Completado | Importación y organización del dataset local. |
-| 3 | Entorno | Completado | Creación del entorno virtual y conexión Neon. |
-| 4 | Repositorio | Completado | Estructura inicial y control de versiones. |
-| 5 | Exploración | Completado | Análisis preliminar del dataset. |
-| 6 | Modelo de datos | Completado | Diseño del MER y estructura de la tabla `movies`. |
-| 7 | Esquema SQL | Completado | Implementación del DDL en PostgreSQL. |
-| 8 | Limpieza | Completado | Limpieza y normalización (`movies_clean.csv`). |
-| 9 | Carga | Completado | Carga final en Neon mediante SQLAlchemy. |
-| 10 | ETL completo | Completado | Pipeline funcional y validado end-to-end. |
-
-Este proyecto finaliza oficialmente en el Día 10.
+| Stage | Description | Output |
+|--------|-------------|---------|
+| Extract | Read local dataset (`movies_raw.csv`). | Raw data in `data/raw/`. |
+| Transform | Cleaning, column selection, normalization. | `movies_clean.csv` in `data/clean/`. |
+| Load | Apply SQL schema and load into Neon. | `movies` table with 7,973 rows. |
+| Validate | Test queries and verification. | ETL pipeline validated end-to-end. |
 
 ---
 
-## 6. Pipeline ETL
+## 7. How to Run the Project
 
-| Etapa | Descripción | Resultado |
-|--------|--------------|-----------|
-| Extract | Lectura del dataset local (`movies_raw.csv`). | Datos crudos en `data/raw/`. |
-| Transform | Limpieza, selección de columnas y normalización. | `movies_clean.csv` en `data/clean/`. |
-| Load | Ejecución del esquema SQL y carga en Neon. | Tabla `movies` con 7.973 filas. |
-| Validate | Consultas de prueba y verificación. | Proceso ETL validado de inicio a fin. |
+### 1. Create environment and install dependencies
 
----
-
-## 7. Ejecución del proyecto
-
-1. **Activar entorno e instalar dependencias**
-
+```
 python -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
+```
 
+### 2. Clean local dataset
 
-2. **Limpiar el dataset local**
-
+```
 python etl/clean_local_netflix_csv.py
+```
 
+### 3. Reset Neon schema
 
-3. **Reiniciar el esquema en Neon**
-
+```
 python etl/reset_schema.py
+```
 
+### 4. Apply SQL schema
 
-4. **Aplicar el esquema SQL**
-
+```
 python etl/apply_schema.py
+```
 
+### 5. Load cleaned data
 
-5. **Cargar los datos limpios**
-
+```
 python etl/etl_load_movies.py
-
-
----
-
-## 8. Resultados finales
-
-- Dataset limpio y normalizado (`movies_clean.csv`).  
-- Esquema SQL aplicado en Neon.  
-- Tabla `movies` creada y poblada correctamente.  
-- Pipeline ETL **completo, modular y reproducible**.  
-- Proyecto **cerrado y finalizado** en el Día 10.
+```
 
 ---
 
-## 9. Autoría
+## 8. Final Results
 
-Proyecto desarrollado por  
+- Clean and normalized dataset (`movies_clean.csv`).  
+- SQL schema applied successfully in Neon.  
+- `movies` table created and populated.  
+- Fully modular and reproducible ETL pipeline.  
+- Project officially **completed and closed on Day 10**.
+
+---
+
+## 9. Author
+
+Developed by  
 **Stefan Eduard Ababei Jorascu**  
-Repositorio GitHub: https://github.com/Eduard-Ababei/streaming_project
+GitHub Repository: https://github.com/Eduard-Ababei/streaming-etl-pipeline 
