@@ -1,27 +1,34 @@
 # Streaming – ETL y Análisis de Datos en la Nube
 
-**Streaming** es un proyecto profesional en curso centrado en la analítica de datos del sector audiovisual.  
-El objetivo es construir un pipeline completo que integre información de plataformas como Netflix, TMDB e IMDb, permitiendo análisis avanzados, visualizaciones interactivas y futura integración con modelos predictivos.
+**Streaming** es un proyecto profesional centrado en la analítica de datos del sector audiovisual.  
+El objetivo de este proyecto es construir un pipeline **ETL completo y funcional** utilizando un **dataset local**, replicando un flujo real de trabajo en ingeniería de datos sin depender de APIs externas.
+
+Este proyecto queda **completamente finalizado en el Día 10**, con un ETL 100% operativo:  
+limpieza del dataset, creación del esquema SQL y carga final en PostgreSQL (Neon).
 
 ---
 
 ## 1. Descripción general
 
-El proyecto replica la estructura de un entorno profesional de datos mediante un flujo ETL (Extract – Transform – Load) totalmente documentado y reproducible.  
-El trabajo se desarrolla en 50 días organizados por fases: desde la ingesta inicial hasta la automatización y la presentación en herramientas BI.  
+El proyecto implementa un flujo ETL profesional formado por:
 
-Actualmente, el desarrollo se encuentra en la Fase 2 (Limpieza y Transformación de datos, Día 10 de 50).
+- Lectura del dataset original (Netflix demo)  
+- Limpieza y normalización con Pandas  
+- Creación del modelo relacional y el esquema SQL  
+- Carga final en Neon mediante SQLAlchemy  
+- Verificación completa del pipeline
+
+Todo el proceso es reproducible desde cero.
 
 ---
 
 ## 2. Objetivos
 
-- Integrar fuentes públicas heterogéneas (APIs y datasets CSV).  
-- Procesar, limpiar y normalizar la información.  
-- Cargar los datos en una base de datos PostgreSQL en la nube (Neon).  
-- Crear consultas SQL y vistas para BI.  
-- Conectar Power BI y Tableau para dashboards ejecutivos.  
-- Automatizar el flujo con Docker, Jenkins y Ansible.  
+- Procesar y limpiar un dataset local.  
+- Definir un esquema SQL coherente para la tabla `movies`.  
+- Cargar los datos limpios en Neon PostgreSQL.  
+- Construir un pipeline ETL estructurado y modular.  
+- Documentar la arquitectura y la ejecución del proyecto.
 
 ---
 
@@ -29,12 +36,10 @@ Actualmente, el desarrollo se encuentra en la Fase 2 (Limpieza y Transformación
 
 | Etapa | Tecnologías |
 |-------|--------------|
-| Extracción | Python, Requests, Pandas |
-| Transformación | Pandas, NumPy |
+| Extracción | CSV local |
+| Transformación | Python, Pandas |
 | Carga | SQLAlchemy, PostgreSQL (Neon Cloud) |
-| Visualización | Tableau, Power BI |
-| Cloud & Big Data | Google BigQuery, GCS |
-| Automatización | Docker, Jenkins, Ansible |
+| Validación | SQL, Python |
 | Control de versiones | Git, GitHub |
 
 ---
@@ -42,48 +47,44 @@ Actualmente, el desarrollo se encuentra en la Fase 2 (Limpieza y Transformación
 ## 4. Arquitectura de carpetas
 
 streaming/
-├─ etl/                    # Scripts ETL: extracción, limpieza, transformación y carga
-│  ├─ extract_tmdb.py
-│  ├─ extract_tmdb_demo.py
-│  ├─ clean_tmdb.py
-│  ├─ clean_local_netflix_csv.py
-│  ├─ apply_schema.py
-│  ├─ reset_schema.py
-│  ├─ etl_load_movies.py
-│  └─ check_connection_direct.py
+├─ etl/ # Scripts ETL
+│ ├─ clean_local_netflix_csv.py
+│ ├─ apply_schema.py
+│ ├─ reset_schema.py
+│ ├─ etl_load_movies.py
+│ └─ check_connection_direct.py
 │
-├─ data/                   # Datasets por etapa del pipeline
-│  ├─ raw/
-│  ├─ processed/
-│  └─ clean/
+├─ data/ # Datasets
+│ ├─ raw/
+│ ├─ clean/
+│ └─ processed/
 │
-├─ sql/                    # Esquemas y consultas SQL
-│  └─ 000_schema.sql
+├─ sql/ # Esquema SQL
+│ └─ 000_schema.sql
 │
-├─ dashboards/             # Visualizaciones BI (Tableau / Power BI)
-├─ infra/                  # CI/CD · Dockerfile · Jenkinsfile · Ansible
-└─ docs/                   # Documentación técnica, diagramas y evidencias
+├─ dashboards/ # (Preparado para visualización)
+├─ infra/ # (Estructura de CI/CD)
+└─ docs/ # Documentación y diagramas
+
 
 ---
 
-## 5. Estado del desarrollo
+## 5. Estado del desarrollo (Proyecto cerrado en Día 10)
 
 | Día | Fase | Estado | Descripción |
 |-----|------|---------|-------------|
-| 1 | Presentación | Completado | Definición del alcance, KPIs y arquitectura general. |
-| 2 | Dataset | Completado | Selección de fuentes (Netflix, TMDB, IMDb) y organización inicial. |
-| 3 | Entorno | Completado | Creación del entorno virtual y configuración de Neon (PostgreSQL). |
-| 4 | Repositorio | Completado | Configuración de GitHub y primer commit del proyecto. |
-| 5 | Exploración | Completado | Análisis exploratorio de columnas, nulos y duplicados. |
-| 6 | Modelo de datos | Completado | Diseño del modelo entidad–relación (MER). |
-| 7 | Esquema SQL | Completado | Implementación de tablas y relaciones en PostgreSQL. |
-| 8 | Carga inicial | Completado | Inserción y verificación de datos base. |
-| 9 | Extracción (TMDb API) | Completado | Desarrollo de extract_tmdb.py y extract_tmdb_demo.py; obtención de datos reales y demo. |
-| 10 | Limpieza de datos | Completado | Creación de clean_tmdb.py y clean_local_netflix_csv.py; depuración de datasets. |
-| 11–20 | Transformación | En desarrollo | Unificación de datasets y generación de tablas auxiliares. |
-| 21–28 | Visualización | Pendiente | Creación de dashboards Power BI y Tableau. |
-| 29–36 | Cloud y BigQuery | Pendiente | Integración con GCP y BigQuery. |
-| 37–50 | DevOps y Cierre | Pendiente | Automatización, documentación final y presentación. |
+| 1 | Presentación | Completado | Definición del alcance y arquitectura general. |
+| 2 | Dataset | Completado | Importación y organización del dataset local. |
+| 3 | Entorno | Completado | Creación del entorno virtual y conexión Neon. |
+| 4 | Repositorio | Completado | Estructura inicial y control de versiones. |
+| 5 | Exploración | Completado | Análisis preliminar del dataset. |
+| 6 | Modelo de datos | Completado | Diseño del MER y estructura de la tabla `movies`. |
+| 7 | Esquema SQL | Completado | Implementación del DDL en PostgreSQL. |
+| 8 | Limpieza | Completado | Limpieza y normalización (`movies_clean.csv`). |
+| 9 | Carga | Completado | Carga final en Neon mediante SQLAlchemy. |
+| 10 | ETL completo | Completado | Pipeline funcional y validado end-to-end. |
+
+Este proyecto finaliza oficialmente en el Día 10.
 
 ---
 
@@ -91,82 +92,56 @@ streaming/
 
 | Etapa | Descripción | Resultado |
 |--------|--------------|-----------|
-| Extract | Descarga de datasets públicos y consulta de la API de TMDB. | Archivos CSV/JSON en data/processed/. |
-| Transform | Limpieza, normalización y creación de columnas derivadas. | Archivos limpios en data/clean/. |
-| Load | Inserción en PostgreSQL (Neon) con SQLAlchemy. | Tablas estructuradas y relacionadas. |
-| Query | Creación de vistas SQL para BI y KPIs. | Vistas optimizadas para Power BI/Tableau. |
-| Visualize | Dashboards interactivos y reportes comparativos. | Indicadores clave (KPIs). |
+| Extract | Lectura del dataset local (`movies_raw.csv`). | Datos crudos en `data/raw/`. |
+| Transform | Limpieza, selección de columnas y normalización. | `movies_clean.csv` en `data/clean/`. |
+| Load | Ejecución del esquema SQL y carga en Neon. | Tabla `movies` con 7.973 filas. |
+| Validate | Consultas de prueba y verificación. | Proceso ETL validado de inicio a fin. |
 
 ---
 
 ## 7. Ejecución del proyecto
 
-1. **Clonar el repositorio**
-   
-git clone https://github.com/Eduard-Ababei/streaming_project
-cd streaming
-
-2. **Configurar entorno virtual e instalar dependencias**
+1. **Activar entorno e instalar dependencias**
 
 python -m venv .venv
-.venv\Scripts\activate   # (Windows)
 .venv\Scripts\activate
 pip install -r requirements.txt
 
 
-3. **Configurar variables de entorno**
+2. **Limpiar el dataset local**
 
-DATABASE_URL=postgresql+psycopg2://user:password@host/dbname?sslmode=require
-TMDB_API_KEY=tu_api_key_aqui
-
-4. **Verificar conexión a Neon**
-
-python etl\check_connection_direct.py
-
-5. **Extraer datos desde TMDB**
-
-python etl\extract_tmdb.py
-
-5.5 **(Si no tienes API key activa, usa la demo)**
-
-python etl\extract_tmdb_demo.py
+python etl/clean_local_netflix_csv.py
 
 
-6. **Limpiar datos extraídos**
-   
-python etl\clean_tmdb.py
+3. **Reiniciar el esquema en Neon**
+
+python etl/reset_schema.py
 
 
-7. **(Opcional) Limpieza del dataset demo**
-   
-python etl\clean_local_netflix_csv.py
+4. **Aplicar el esquema SQL**
+
+python etl/apply_schema.py
+
+
+5. **Cargar los datos limpios**
+
+python etl/etl_load_movies.py
 
 
 ---
 
-## 8. Resultados actuales
+## 8. Resultados finales
 
-- Dataset limpio y normalizado (`data/clean/movies_clean.csv`).  
-- Conexión establecida entre Python y Neon PostgreSQL.  
-- Pipeline funcional de extracción y limpieza totalmente reproducible.  
-- Preparación finalizada para iniciar la transformación y carga en base de datos.
-
----
-
-## 9. Próximos pasos
-
-- Fase 3: Transformación de datos y creación de tablas auxiliares.  
-- Fase 4: Dashboards y KPIs en Tableau y Power BI.  
-- Fase 5: Integración Cloud (BigQuery y GCS).  
-- Fase 6: CI/CD con Docker y Jenkins.  
-- Fase 7: Documentación final y entrega.
+- Dataset limpio y normalizado (`movies_clean.csv`).  
+- Esquema SQL aplicado en Neon.  
+- Tabla `movies` creada y poblada correctamente.  
+- Pipeline ETL **completo, modular y reproducible**.  
+- Proyecto **cerrado y finalizado** en el Día 10.
 
 ---
 
-## 10. Autoría
+## 9. Autoría
 
-Proyecto en desarrollo como parte del TFG/FCT  
-**Transformación Digital en el Streaming: Big Data e IA en la Industria Audiovisual**  
-
-Autor: **Stefan Eduard Ababei Jorascu**  
-Repositorio: [GitHub](https://github.com/tuusuario/streaming)
+Proyecto desarrollado por  
+**Stefan Eduard Ababei Jorascu**  
+Repositorio GitHub: https://github.com/Eduard-Ababei/streaming_project

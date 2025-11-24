@@ -1,7 +1,7 @@
 import os
 from sqlalchemy import create_engine, text
 from dotenv import load_dotenv
-import pathlib
+from pathlib import Path
 
 print("🛠️ Creando tablas en Neon...")
 
@@ -14,10 +14,10 @@ if not DATABASE_URL:
 # 2. Crear conexión con SQLAlchemy
 engine = create_engine(DATABASE_URL)
 
-# 3. Leer archivo DDL (definición del esquema)
-ddl_path = pathlib.Path("C:/Users/casco/Desktop/streaming/000_schema.sql")
+# 3. Ruta correcta al archivo DDL
+ddl_path = Path(__file__).resolve().parent.parent / "sql" / "000_schema.sql"
 if not ddl_path.exists():
-    raise FileNotFoundError("❌ No se encontró sql/000_schema.sql")
+    raise FileNotFoundError(f"No se encontró el archivo SQL en: {ddl_path}")
 
 ddl_content = ddl_path.read_text(encoding="utf-8")
 
