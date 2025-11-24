@@ -46,6 +46,7 @@ Todo el proceso es reproducible desde cero.
 
 ## 4. Arquitectura de carpetas
 
+```
 data/
     ├── clean/
         └── movies_clean.csv
@@ -79,6 +80,7 @@ from dotenv import load_dotenv.py
 README.md
 requirements.txt
 
+```
 
 
 ---
